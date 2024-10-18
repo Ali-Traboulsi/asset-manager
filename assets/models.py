@@ -61,6 +61,13 @@ class Lending(models.Model):
             return False
         return (timezone.now() - self.lend_date).days > days
 
+    def mark_as_returned(self):
+        self.return_date = timezone.now()
+        self.save()
+
+
+    def get_employee_name(self):
+        return self.employee.user.username
+
     def __str__(self):
         return f"{self.asset.name} lent to {self.employee.user.username}"
-
