@@ -36,6 +36,8 @@
                         <div class="action-buttons">
                             <a href="{% url 'edit_asset' asset.id %}" class="edit">Edit</a>
                             <a href="{% url 'delete_asset' asset.id %}" class="delete">Delete</a>
+                            <!-- Lend Asset Button -->
+                            <a href="{% url 'lend_asset' %}?asset_id={{ asset.id }}" class="lend">Lend Asset</a>
                         </div>
                     </td>
                 </tr>

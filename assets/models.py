@@ -1,16 +1,16 @@
+import uuid
+
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db import models
-import uuid
 
 
 # Create your models here.
 class Asset(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(verbose_name="asset name", max_length=100)
     description = models.TextField(verbose_name="asset description", max_length=5000)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # default representation
     def __str__(self):
@@ -23,12 +23,11 @@ class Asset(models.Model):
 
 # Employee
 class Employee(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.username
@@ -46,6 +45,8 @@ class Lending(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     lend_date = models.DateTimeField(auto_now_add=True)
     return_date = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def is_returned(self):
         return self.return_date is not None

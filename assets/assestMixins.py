@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
 
 class AdminRequiredMixin(UserPassesTestMixin):
@@ -8,4 +9,4 @@ class AdminRequiredMixin(UserPassesTestMixin):
         return self.request.user.is_superuser
 
     def handle_no_permission(self):
-      return redirect('fetch_assets_list')
+        return redirect(reverse_lazy('admin:login'))

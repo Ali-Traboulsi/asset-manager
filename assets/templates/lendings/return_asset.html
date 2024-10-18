@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Return Asset</title>
+</head>
+<body>
+    <h1>Return Asset</h1>
+    <ul>
+        {% for lending in lendings %}
+            <li>{{ lending.asset.name }} lent to {{ lending.employee.user.username }}
+                - <form method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Return</button>
+                    <input type="hidden" name="lending_id" value="{{ lending.id }}">
+                </form></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'assets_list' %}">Back to Assets List</a>
+</body>
+</html>
