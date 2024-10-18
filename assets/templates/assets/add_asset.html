@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add Asset</title>
+
 </head>
 <body>
+    <h1>Add New Asset</h1>
 
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Asset</button>
+    </form>
+
+    <a href="{% url 'user_assets' %}">Back to Assets List</a>
 </body>
 </html>

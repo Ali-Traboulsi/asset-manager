@@ -16,3 +16,9 @@ class Asset(models.Model):
     # representation for debugging
     def __repr__(self):
         return f"Asset(name='{self.name}', description='{self.description}', created_at={self.created_at})"
+
+
+# Employee
+
+
+# Lending

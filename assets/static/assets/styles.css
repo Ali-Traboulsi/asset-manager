@@ -1,0 +1,94 @@
+/* General form styles */
+form {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Submit and Cancel buttons */
+form input[type="submit"],
+form input[type="reset"] {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form input[type="submit"]:hover,
+form input[type="reset"]:hover {
+    background-color: #0056b3;
+}
+
+form input[type="reset"] {
+    background-color: #dc3545;
+    margin-left: 10px;
+}
+
+form .form-group {
+    margin-bottom: 15px;
+}
+
+/* Form titles */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Specific styles for delete forms */
+form.delete-form {
+    background-color: #fff5f5;
+    border-color: #dc3545;
+}
+
+/* Specific styles for buttons on delete confirmation */
+form.delete-form input[type="submit"] {
+    background-color: #dc3545;
+}
+
+form.delete-form input[type="submit"]:hover {
+    background-color: #c82333;
+}
+

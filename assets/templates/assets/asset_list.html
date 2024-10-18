@@ -1,14 +1,51 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="EN">
+<html lang="en">
 <head>
-    <title>Assets</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset List</title>
+    <link rel="stylesheet" href="{% static 'assets/list_assets.css' %}">
 </head>
 <body>
-    <h1>Asset List</h1>
-    <ul>
-        {% for asset in assets %}
-            <li>{{ asset.name }} - {{ asset.description }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h2>Asset List</h2>
+
+        <!-- Button to add new asset -->
+        <a href="{% url 'add_asset' %}" class="add-asset-btn">Add New Asset</a>
+
+        <!-- Asset listing table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Asset Name</th>
+                    <th>Description</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for asset in assets %}
+                <tr>
+                    <td>{{ asset.id }}</td>
+                    <td>{{ asset.name }}</td>
+                    <td>{{ asset.description }}</td>
+                    <td>{{ asset.created_at }}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <a href="{% url 'edit_asset' asset.id %}" class="edit">Edit</a>
+                            <a href="{% url 'delete_asset' asset.id %}" class="delete">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No assets found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
