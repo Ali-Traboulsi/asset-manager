@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 import uuid
 
@@ -19,6 +20,34 @@ class Asset(models.Model):
 
 
 # Employee
+class Employee(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    department = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
+
+    def __repr__(self):
+        return f"Employee(username='{self.user.username}', " \
+               f"department='{self.department}', " \
+               f"position='{self.position}', " \
+               f"created_at={self.created_at})"
 
 
 # Lending
+class Lending(models.Model):
+    asset = models.ForeignKey(Asset, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    lend_date = models.DateTimeField(auto_now_add=True)
+    return_date = models.DateTimeField(null=True, blank=True)
+
+    def is_returned(self):
+        return self.return_date is not None
+
+    def __str__(self):
+        return f"{self.asset.name} lent to {self.employee.user.username}"
+
