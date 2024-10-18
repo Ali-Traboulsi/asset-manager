@@ -1,5 +1,5 @@
 from django import forms
-from .models import Asset
+from .models import Asset, Lending, Employee
 
 
 class AssetForm(forms.ModelForm):
@@ -23,4 +23,15 @@ class AssetForm(forms.ModelForm):
             'name': 'Please provide a unique name for the asset.',
             'description': 'Provide a detailed description of the asset.',
         }
+
+
+class LendingForm(forms.ModelForm):
+    class Meta:
+        model = Lending
+        fields = ['asset', 'employee']
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            # make sure only current employees are displayed
+            self.fields['employee'].queryset = Employee.objects.all()
 

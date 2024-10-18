@@ -1,6 +1,8 @@
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db import models
 import uuid
+
 
 # Create your models here.
 class Asset(models.Model):
@@ -47,6 +49,17 @@ class Lending(models.Model):
 
     def is_returned(self):
         return self.return_date is not None
+
+    # calculate lending duration
+    def lending_duration(self):
+        if self.return_date:
+            return self.return_date - self.lend_date
+        return timezone.now() - self.lend_date
+
+    def is_overdue(self, days=30):
+        if self.return_date:
+            return False
+        return (timezone.now() - self.lend_date).days > days
 
     def __str__(self):
         return f"{self.asset.name} lent to {self.employee.user.username}"
